@@ -1,0 +1,17 @@
+{% extends 'stocks/base.html' %}
+
+{% block page_title %}
+    {% if user.is_authenticated %}
+        Home
+    {% else %}
+        Login or signUp
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        Hello, {{ user.username }}
+    {% else %}
+        <a href="accounts/login/">Login</a> or <a href="accounts/signup/">SignUp</a>
+    {% endif %}
+{% endblock %}
