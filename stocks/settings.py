@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'stocks_list',
+    'add_stock',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

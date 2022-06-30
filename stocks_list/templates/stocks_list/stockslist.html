@@ -4,5 +4,19 @@
 {% endblock %}
 
 {% block content %}
-    
+    <div>
+        <div>
+            <ul>
+                {% for stock in stocks %}
+                    <li><a href="{% url 'graph' stock.symbol %}">{{ stock.name }}</a></li>
+                {% endfor %}
+            </ul>
+            {% include 'add_stock/add-stock.html' %}
+        </div>
+        <div>
+            {% if graph %}
+                <img src="data:image/png;base64, {{ graph|safe }}">
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
