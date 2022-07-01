@@ -1,4 +1,5 @@
-from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.views import View
 from .models import StockList
@@ -31,25 +32,28 @@ def get_graph():
 
 class GraphView(View):
     def get(self, request, symbol):
-        api_key = 'C7UWME84WXZD1O26'
-        period = 60
-        ts = TimeSeries(key=api_key, output_format='pandas')
-        data_ts = ts.get_intraday(symbol.upper(), interval="1min", outputsize='full')
-        # ti = TechIndicators(key=api_key, output_format="pandas")
-        # data_ti, meta_data_ti = ti.get_rsi(symbol.upper(), interval="1min", time_period=period, series_type="close")
-        df = data_ts[0][period::]
-        # df2 = data_ti
-        # total_data = pd.concat([df,df2], axis=1, sort=True)
-        plt.switch_backend('AGG')
-        plt.plot(df['4. close'])
-        plt.title(symbol)
-        plt.ylabel('price')
-        plt.xlabel('time')
-        # plt.savefig("graph.png", format="png")
-        stocks = StockList.objects.filter(user=request.user)
-        graph = get_graph()
-        context = {
-            'stocks': stocks,
-            'graph': graph
-        }
-        return render(request, 'stocks_list/stockslist.html', context)
+        try:
+            api_key = 'C7UWME84WXZD1O26'
+            period = 60
+            ts = TimeSeries(key=api_key, output_format='pandas')
+            data_ts = ts.get_intraday(symbol.upper(), interval="1min", outputsize='full')
+            # ti = TechIndicators(key=api_key, output_format="pandas")
+            # data_ti, meta_data_ti = ti.get_rsi(symbol.upper(), interval="1min", time_period=period, series_type="close")
+            df = data_ts[0][period::]
+            # df2 = data_ti
+            # total_data = pd.concat([df,df2], axis=1, sort=True)
+            plt.switch_backend('AGG')
+            plt.plot(df['4. close'])
+            plt.title(symbol)
+            plt.ylabel('price')
+            plt.xlabel('time')
+            # plt.savefig("graph.png", format="png")
+            stocks = StockList.objects.filter(user=request.user)
+            graph = get_graph()
+            context = {
+                'stocks': stocks,
+                'graph': graph
+            }
+            return render(request, 'stocks_list/stockslist.html', context)
+        except:
+            return HttpResponseRedirect(reverse('allstocks'))

@@ -22,6 +22,8 @@
         <div>
             {% if graph %}
                 <img src="data:image/png;base64, {{ graph|safe }}">
+            {% else %}
+                <h1>Invalid stock symbol</h1>
             {% endif %}
             <!-- <h3>Side content</h3> -->
         </div>

@@ -1,7 +1,7 @@
 <h3>Do not use any special character in symbol field</h3>
 <form action="/add-stock/" method="POST">
     {% csrf_token %}
-    <input placeholder="name" name="name">
-    <input placeholder="symbol" name="symbol">
+    <input placeholder="name" name="name" required>
+    <input placeholder="symbol" name="symbol" required>
     <button>Add</button>
 </form>

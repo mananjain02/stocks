@@ -10,9 +10,12 @@ class AddStock(View):
         return render(request, 'add_stock/add-stock.html')
 
     def post(self, request):
+        for i in request.POST['symbol'].upper():
+            if not (i>='A' and i<='Z'):
+                return HttpResponseRedirect(reverse('allstocks'))
         stock = StockList()
         stock.name = request.POST['name']
-        stock.symbol = request.POST['symbol']
+        stock.symbol = request.POST['symbol'].upper()
         stock.user = request.user
         stock.save()
         redirect_path = reverse('allstocks')
