@@ -1,10 +1,16 @@
 {% extends 'stocks/base.html' %}
+{% load static %}
+ 
 {% block page_title %}
     Stocks
 {% endblock %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'stocks_list/stockslist.css' %}">
+{% endblock %}
+
 {% block content %}
-    <div>
+    <div class="stockslist">
         <div>
             <ul>
                 {% for stock in stocks %}
@@ -17,6 +23,7 @@
             {% if graph %}
                 <img src="data:image/png;base64, {{ graph|safe }}">
             {% endif %}
+            <!-- <h3>Side content</h3> -->
         </div>
     </div>
 {% endblock %}
