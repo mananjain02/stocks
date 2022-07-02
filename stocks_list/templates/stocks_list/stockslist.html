@@ -18,6 +18,7 @@
                 {% endfor %}
             </ul>
             <a href="{% url 'addstock' %}">Add More</a>
+            <a href="{% url 'removestock' %}">Edit</a>
         </div>
         <div>
             {% include 'stocks_list/eachstock.html' %}

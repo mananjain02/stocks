@@ -6,7 +6,7 @@ from stocks_list.models import StockList
 from add_stock.models import AllStocks
 
 # Create your views here.
-class AddStock(View):
+class AddStockView(View):
     def get(self, request):
         all_stocks = AllStocks.objects.all()
         context = {

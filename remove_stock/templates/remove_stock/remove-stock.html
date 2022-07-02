@@ -1,19 +1,19 @@
 {% extends 'stocks/base.html' %}
 
 {% block page_title %}
-    Add Stocks
+    Remove Stocks
 {% endblock %}
 
 {% block content %}
     {{ error_message }}
     <br>
     {% for stock in all_stocks %}
-        <form action="{% url 'addstock' %}" method="POST">
+        <form action="{% url 'removestock' %}" method="POST">
             {% csrf_token %}
             <h3>{{ stock.name }} ({{ stock.symbol }})</h3>
             <input type="hidden" value="{{ stock.name }}" name="name">
             <input type="hidden" value="{{ stock.symbol }}" name="symbol">
-            <button>Add</button>
+            <button>Remove</button>
         </form>
         <hr>
     {% endfor %}
