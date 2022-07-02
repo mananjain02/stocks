@@ -1,6 +1,21 @@
-<form action="/add-stock/" method="POST">
-    {% csrf_token %}
-    <input placeholder="name" name="name" required>
-    <input placeholder="symbol" name="symbol" required>
-    <button>Add</button>
-</form>
+{% extends 'stocks/base.html' %}
+
+{% block page_title %}
+    Add Stocks
+{% endblock %}
+
+{% block content %}
+    {{ error_message }}
+    <br>
+    <a href="{% url 'allstocks' %}">Back</a>
+    {% for stock in all_stocks %}
+        <form action="{% url 'addstock' %}" method="POST">
+            {% csrf_token %}
+            <h3>{{ stock.name }} ({{ stock.symbol }})</h3>
+            <input type="hidden" value="{{ stock.name }}" name="name">
+            <input type="hidden" value="{{ stock.symbol }}" name="symbol">
+            <button>Add</button>
+        </form>
+        <hr>
+    {% endfor %}
+{% endblock %}

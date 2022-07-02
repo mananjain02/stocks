@@ -17,7 +17,7 @@
                     <li><a href="{% url 'graph' stock.symbol default_time %}">{{ stock.name }}</a></li>
                 {% endfor %}
             </ul>
-            {% include 'add_stock/add-stock.html' %}
+            <a href="{% url 'addstock' %}">Add More</a>
         </div>
         <div>
             {% include 'stocks_list/eachstock.html' %}
