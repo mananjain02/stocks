@@ -14,18 +14,13 @@
         <div>
             <ul>
                 {% for stock in stocks %}
-                    <li><a href="{% url 'graph' stock.symbol %}">{{ stock.name }}</a></li>
+                    <li><a href="{% url 'graph' stock.symbol default_time %}">{{ stock.name }}</a></li>
                 {% endfor %}
             </ul>
             {% include 'add_stock/add-stock.html' %}
         </div>
         <div>
-            {% if graph %}
-                <img src="data:image/png;base64, {{ graph|safe }}">
-            {% else %}
-                <h1>Invalid stock symbol</h1>
-            {% endif %}
-            <!-- <h3>Side content</h3> -->
+            {% include 'stocks_list/eachstock.html' %}
         </div>
     </div>
 {% endblock %}

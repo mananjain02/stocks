@@ -1,0 +1,18 @@
+<!-- This forloop is for testing only -->
+{% for time in time_slots %}
+    <nav>
+        <a href="{% url 'graph' symbol time %}">{{ time }}</a>
+    </nav>
+{% endfor %}
+<!-- Remove it after testing -->
+
+{% if graph %}
+    <!-- {% for time in time_slots %}
+        <nav>
+            <a href="{% url 'graph' symbol time %}">{{ time }}</a>
+        </nav>
+    {% endfor %} -->
+    <img src="data:image/png;base64, {{ graph|safe }}">
+{% else %}
+    <h1>Graph of {{ symbol }}</h1>
+{% endif %}

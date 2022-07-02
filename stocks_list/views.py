@@ -14,11 +14,12 @@ class StocksView(View):
         if(request.user.is_authenticated):
             stocks = StockList.objects.filter(user=request.user)
             context = {
-                'stocks': stocks
+                'stocks': stocks,
+                'default_time': "1min"
             }
             return render(request, 'stocks_list/stockslist.html', context)
         else:
-            return HttpResponseRedirect('accounts/login')
+            return HttpResponseRedirect(reverse('account_login'))
 
 def get_graph():
     buffer = BytesIO()
@@ -31,12 +32,12 @@ def get_graph():
     return graph
 
 class GraphView(View):
-    def get(self, request, symbol):
+    def get(self, request, symbol, time):
         try:
             api_key = 'C7UWME84WXZD1O26'
             period = 60
             ts = TimeSeries(key=api_key, output_format='pandas')
-            data_ts = ts.get_intraday(symbol.upper(), interval="1min", outputsize='full')
+            data_ts = ts.get_intraday(symbol.upper(), interval=time, outputsize='full')
             # ti = TechIndicators(key=api_key, output_format="pandas")
             # data_ti, meta_data_ti = ti.get_rsi(symbol.upper(), interval="1min", time_period=period, series_type="close")
             df = data_ts[0][period::]
@@ -47,12 +48,16 @@ class GraphView(View):
             plt.title(symbol)
             plt.ylabel('price')
             plt.xlabel('time')
+            plt.title(symbol)
             # plt.savefig("graph.png", format="png")
             stocks = StockList.objects.filter(user=request.user)
             graph = get_graph()
+            time_slots = ['1min', '5min', '15min', '30min', '60min']
             context = {
                 'stocks': stocks,
-                'graph': graph
+                'graph': graph,
+                'time_slots': time_slots,
+                'symbol': symbol
             }
             return render(request, 'stocks_list/stockslist.html', context)
         except:
