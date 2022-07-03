@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    {{ error_message }}
+    <h3>{{ error_message }}</h3>
+    <h1>Add Stocks</h1>
     <br>
     {% for stock in all_stocks %}
         <form action="{% url 'addstock' %}" method="POST">
