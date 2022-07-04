@@ -14,7 +14,7 @@
         <div>
             <ul>
                 {% for stock in stocks %}
-                    <li><a href="{% url 'graph' stock.symbol default_time %}">{{ stock.name }}</a></li>
+                    <li><a href="{% url 'graph' stock.symbol interval_time %}">{{ stock.name }}</a></li>
                 {% endfor %}
             </ul>
             <a href="{% url 'addstock' %}">Add More</a>

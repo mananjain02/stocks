@@ -7,5 +7,5 @@ urlpatterns = [
     path('add-stock/', include('add_stock.urls')),
     path('remove-stock/', include('remove_stock.urls')),
     path('accounts/', include('allauth.urls')),
-    path('<slug:symbol>/<slug:time>', views.GraphView.as_view(), name='graph')
+    path('<slug:symbol>/<slug:inter>', views.GraphView.as_view(), name='graph')
 ]
