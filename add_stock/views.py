@@ -25,13 +25,6 @@ class AddStockView(View):
         return render(request, 'add_stock/add-stock.html', context)
 
     def post(self, request):
-        already_added_stocks = StockList.objects.filter(user=request.user)
-        for stock in already_added_stocks:
-            if stock.symbol == request.POST['symbol']:
-                return render(request, 'add_stock/add-stock.html', {
-                    "error_message": f"{ stock.name } is already added",
-                    "all_stocks": AllStocks.objects.all(),
-                })
         stock_to_add = StockList(
             name = request.POST['name'],
             symbol = request.POST['symbol'],
