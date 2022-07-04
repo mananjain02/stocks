@@ -4,8 +4,8 @@
             <a href="{% url 'graph' symbol time %}">{{ time }}</a>
         </nav>
     {% endfor %}
-    <!-- <img src="data:image/png;base64, {{ graph|safe }}"> -->
-    <h1>{{ graph }}</h1>
+    <img src="data:image/png;base64, {{ graph|safe }}">
+    <!-- <h1>{{ graph }}</h1> -->
 {% else %}
     <h1>Graph of {{ symbol }}</h1>
 {% endif %}
